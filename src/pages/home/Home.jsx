@@ -1,10 +1,19 @@
-import React from 'react'
-import { Topbar } from '../../components/Topbar/Topbar'
+import React from "react";
+import "./Home.css";
+import Rightbar from "../../components/rightbar/Rightbar";
+import Sidebar from "../../components/sidebar/Sidebar";
+import TimeLine from "../../components/timeline/TimeLine";
+import { Topbar } from "../../components/Topbar/Topbar";
 
 export default function Home() {
-  return (
-      <>
-          <Topbar />
-      </>
-  )
+    return (
+        <>
+            <Topbar />
+            <div className='homeContainer'>
+                <Sidebar />
+                <TimeLine />
+                <Rightbar />
+            </div>
+        </>
+    );
 }
