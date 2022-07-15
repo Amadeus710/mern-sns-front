@@ -28,12 +28,18 @@ export default function Profile() {
                     <div className='profileRightTop'>
                         <div className='profileCover'>
                             <img
-                                src={user.coverPicture || PUBLIC_FOLDER + "/post/3.jpeg"}
+                                src={
+                                    user.coverPicture ||
+                                    PUBLIC_FOLDER + "/post/3.jpeg"
+                                }
                                 alt=''
                                 className='profileCoverImg'
                             />
                             <img
-                                src={user.profilePicture || PUBLIC_FOLDER + '/person/noAvatar.png'}
+                                src={
+                                    PUBLIC_FOLDER + user.profilePicture ||
+                                    PUBLIC_FOLDER + "/person/noAvatar.png"
+                                }
                                 alt=''
                                 className='profileUserImg'
                             />

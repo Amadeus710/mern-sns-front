@@ -1,25 +1,61 @@
-import React from 'react'
+import React, { useContext, useRef } from "react";
+import { loginCall } from "../../actionCalls";
+import { AuthContext } from "../../state/AuthContext";
 import "./Login.css";
 
 export default function Login() {
-  return (
-      <div className='login'>
-          <div className='loginWrapper'>
-              <div className='loginLeft'>
-                  <h3 className='loginLogo'>Real SNS</h3>
-                  <span className='loginDesc'>本格的なSNSを自分の手で</span>
-              </div>
-              <div className='loginRight'>
-                  <div className='loginBox'>
-                      <p className='loginMsg'>ログインはこちら</p>
-                      <input type='text' className='loginInput' placeholder='Email' />
-                      <input type='text' className='loginInput' placeholder='password' />
-                      <button className='loginButton'>ログイン</button>
-                      <span className='loginForgot'>パスワートを忘れた方</span>
-                      <button className='loginRegisterButton'>アカウント作成</button>
-                  </div>
-              </div>
-          </div>
-      </div>
-  );
+    const email = useRef();
+    const password = useRef();
+    const { user, isFetching, error, dispatch } = useContext(AuthContext);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // console.log(email.current.value);
+        // console.log(password.current.value);
+        loginCall(
+            { email: email.current.value, password: password.current.value },
+            dispatch
+        );
+    };
+
+    console.log(user)
+    return (
+        <div className='login'>
+            <div className='loginWrapper'>
+                <div className='loginLeft'>
+                    <h3 className='loginLogo'>Real SNS</h3>
+                    <span className='loginDesc'>本格的なSNSを自分の手で</span>
+                </div>
+                <div className='loginRight'>
+                    <form
+                        className='loginBox'
+                        onSubmit={(e) => handleSubmit(e)}>
+                        <p className='loginMsg'>ログインはこちら</p>
+                        <input
+                            type='email'
+                            className='loginInput'
+                            placeholder='Email'
+                            required
+                            ref={email}
+                        />
+                        <input
+                            type='password'
+                            className='loginInput'
+                            placeholder='password'
+                            required
+                            minLength='5'
+                            ref={password}
+                        />
+                        <button className='loginButton'>ログイン</button>
+                        <span className='loginForgot'>
+                            パスワートを忘れた方
+                        </span>
+                        <button className='loginRegisterButton'>
+                            アカウント作成
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    );
 }
